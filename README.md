@@ -1,47 +1,96 @@
 # localpilot
+
 _Use GitHub Copilot locally on your Macbook with one-click!_
 
 ![image](https://github.com/danielgross/localpilot/assets/279531/521d0613-7423-4839-a5e8-42098cd65a5e)
 
 ## Demo Video
 
-
 https://github.com/danielgross/localpilot/assets/279531/3259981b-39f7-4bfa-8a45-84bde6d4ba4c
-
-
 
 _This video is not sped up or slowed down._
 
-## Installation 
-1. First, open VS Code Settings and add the following to your settings.json file: 
+## Installation
+
+1. First, open VS Code Settings and add the following to your settings.json file:
+
 ```json
 "github.copilot.advanced": {
     "debug.testOverrideProxyUrl": "http://localhost:5001",
-    "debug.overrideProxyUrl": "http://localhost:5001"
+    "debug.overrideProxyUrl": "http://localhost:5001",
+    "debug.chatOverrideProxyUrl" : "http://localhost:5001",
 }
 ```
 
-2. Create a virtualenv to run this Python process, install the requirements, and download the models. 
+2. Bypass auth for copilot
+
+   - replace `{base:n,api:s}` with `{ base: Kc.URI.parse('http://localhost:5001', !0), api: Kc.URI.parse('http://localhost:5001', !0) }` in extension.js of copilot
+   - replace `` `${this.baseUri.scheme}://api.${this.baseUri.authority}` `` with `'http://localhost:5001'` in extension.js of copilot chat
+
+3. Configure more models
+
+You can add new models, with these formats to the list `models` in `config.py`:
+
+    - For a model to be downloaded and served in the same machine:
+
+```python
+    "Mistral-7b": {
+        "url": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.1-GGUF/resolve/main/mistral-7b-instruct-v0.1.Q5_K_M.gguf",
+        "type": "local",
+        "filename": "mistral-7b-instruct-v0.1.Q5_K_M.gguf",
+    },
+```
+
+    - For using a hosted OpenAI compatible API without auth :
+
+```python
+    "Zephyr": {
+        "domain": "http://someurl:8000",
+        "model": "zephyr-7b-beta.Q4_0",
+        "type": "remote",
+    },
+```
+
+    - For using a hosted OpenAI compatible API with auth :
+
+```python
+    "Mistral": {
+        "domain": "http://someurl:8000",
+        "model": "mistral-7b-code-16k-qlora.Q6_K",
+        "api_key": "SOME_API_KEY",
+        "type": "remote",
+    },
+```
+
+4. Create a virtualenv to run this Python process, install the requirements, and download the models.
+
 ```python
 virtualenv venv
 source venv/bin/activate
 pip install -r requirements.txt
-# First setup run. This will download several models to your ~/models folder.
-python app.py --setup 
-``` 
+# First setup run. This will download several models to your ~/models folder. ( you can skip this step if you only plan on using remotely hosted models)
+python app.py --setup
+```
 
-3. Run it! 
+5. Choose a model in the ModelPicker
+
+![image](https://github.com/danielgross/localpilot/assets/279531/521d0613-7423-4839-a5e8-42098cd65a5e)
+
+6. Run it!
+
 ```python
 python app.py
 ```
 
-Enjoy your on-device Copilot! 
+7. Reload your VSCode windows to apply the changes in the Copilot extensions
+
+Enjoy your on-device Copilot!
 
 ## Caveat FAQ
 
-**Is the code as good as GitHub Copilot?** 
+**Is the code as good as GitHub Copilot?**
 
-For simple line completions yes. For simple function completions, mostly. For complex functions... maybe. 
+For simple line completions yes. For simple function completions, mostly. For complex functions... maybe.
 
 **Is it as fast as GitHub Copilot?**
 
@@ -55,8 +104,6 @@ Yes!, I'm sure it can be, I just haven't had the time. Please do submit a pull r
 
 Hmm, that seems like an interesting idea.
 
-**OK, but in summary, is it good?** 
+**OK, but in summary, is it good?**
 
 Only if your network is bad. I don't think it's competitive if you have fast Internet. But it sure is awesome on airplanes and while tethering!
-
-
