@@ -1,6 +1,8 @@
 # localpilot
 
-_Use GitHub Copilot locally on your Macbook with one-click!_
+! This is a fork of [danielgross](https://github.com/danielgross)'s [localpilot](https://github.com/danielgross/localpilot) implementation with addition of supporting Remote OpenAI Compatible APIs and the bypass for auth for the Copilot and Copilot Chat extensions. !
+
+_Use GitHub Copilot and Copilot Chat locally on your Macbook with one-click!_
 
 ![image](https://github.com/danielgross/localpilot/assets/279531/521d0613-7423-4839-a5e8-42098cd65a5e)
 
@@ -22,10 +24,10 @@ _This video is not sped up or slowed down._
 }
 ```
 
-2. Bypass auth for copilot
+2. Bypass auth for Copilot and Copilot Chat extensions
 
-   - replace `{base:n,api:s}` with `{ base: Kc.URI.parse('http://localhost:5001', !0), api: Kc.URI.parse('http://localhost:5001', !0) }` in extension.js of copilot
-   - replace `` `${this.baseUri.scheme}://api.${this.baseUri.authority}` `` with `'http://localhost:5001'` in extension.js of copilot chat
+   - replace `{base:n,api:s}` with `{ base: Kc.URI.parse('http://localhost:5001', !0), api: Kc.URI.parse('http://localhost:5001', !0) }` in extension.js of copilot (found in `~/.vscode/extensions/github.copilot-1.143.0/dist/extension.js`)
+   - replace `` `${this.baseUri.scheme}://api.${this.baseUri.authority}` `` with `'http://localhost:5001'` in extension.js of copilot chat (found in `~/.vscode/extensions/github.copilot-chat-0.11.1/dist/extension.js`)
 
 3. Configure more models
 
