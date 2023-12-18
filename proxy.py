@@ -56,6 +56,71 @@ async def set_target(request: Request):
     message = f"Target set to {state}"
     return responses.JSONResponse({"message": message}, status_code=200)
 
+@app.route('/telemetry{path:path}', methods=["GET", "POST", "PUT", "DELETE"])
+async def telemetry(request: Request):
+    if request.url.path == '/telemetry/vscode/ab' :
+        data  = {
+            "Features": [
+                "vsliv368cf",
+                "vsreu685",
+                "python383cf",
+                "vspor879",
+                "vspor708",
+                "vspor363",
+                "binariesv615",
+                "bridge0708",
+                "bridge0723",
+                "vsaa593",
+                "copilotaa-treat",
+                "c4g48928",
+                "asynctok",
+                "aa_t_chat"
+            ],
+            "Flights": {
+                "1j36": "vsliv368cf",
+                "1j6r": "vsreu685",
+                "1o3k": "python383cf",
+                "1wr3": "vspor879",
+                "1wr7": "vspor708",
+                "1wra": "vspor363",
+                "2po2": "binariesv615",
+                "2spg": "bridge0708",
+                "2v3u": "bridge0723",
+                "30jm": "vsaa593",
+                "3sde": "copilotaa-treat",
+                "3w27": "c4g48928",
+                "57ej": "asynctok",
+                "5lyy": "aa_t_chat"
+            },
+            "Configs": [
+                {
+                    "Id": "vscode",
+                    "Parameters": {
+                        "aa_t_chat": True,
+                        "account-aa": True,
+                        "config.editor.experimental.asyncTokenization": True,
+                        "copilotaa": True,
+                        "livesharecontinuousaa": False,
+                        "mindaroBinariesVersion": "1.0.20210615.1",
+                        "mindaroBinariesVersion-1.0.20210702": "1.0.20210708.15",
+                        "mindaroBinariesVersion-1.0.20210723": "1.0.20210723.6",
+                        "portForwardingServiceEnabled-development": True,
+                        "portForwardingServiceEnabled-production": True,
+                        "portForwardingServiceEnabled-staging": True,
+                        "RemoveKernelToolbarInInteractiveWindow": False,
+                        "reusableLinks": True,
+                        "shouldUseGrpcService": True
+                    }
+                }
+            ],
+            "ParameterGroups": None,
+            "FlightingVersion": 5446,
+            "ImpressionId": "139A620C2CC74DBF822AFF55CA99E6E8",
+            "AssignmentContext": "vsliv368cf:30146710;vsreu685:30147344;python383cf:30185419;vspor879:30202332;vspor708:30202333;vspor363:30204092;binariesv615:30325510;bridge0708:30335490;bridge0723:30353136;vsaa593:30376534;copilotaa-treat:30487095;c4g48928:30535728;asynctok:30898717;aa_t_chat:30882232;"
+        }
+    else :
+        data = {"success" : True}
+    return responses.JSONResponse(data, status_code=200)
 
 # Used to support copilot
 @app.route("/copilot_internal/v2/token", methods=["GET"])

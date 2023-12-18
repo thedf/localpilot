@@ -88,6 +88,15 @@ python app.py
 
 Enjoy your on-device Copilot!
 
+
+NB:
+if you want to disable Telemetry, you can replace all of these in both extension.js:
+`"https://copilot-telemetry.githubusercontent.com/telemetry"` with `"http://localhost:5001/telemetry"`
+`"https://default.exp-tas.com` with `"http://localhost:5001/telemetry`
+`"https://origin-tracker.githubusercontent.com"` with `"http://localhost:5001/telemetry"`
+
+However, this may violate Copilot's Terms of Service, so proceed at your own risk.
+
 ## Caveat FAQ
 
 **Is the code as good as GitHub Copilot?**
