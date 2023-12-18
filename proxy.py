@@ -56,9 +56,11 @@ async def set_target(request: Request):
     message = f"Target set to {state}"
     return responses.JSONResponse({"message": message}, status_code=200)
 
+@app.route("/", methods=["GET", "POST", "PUT", "DELETE"])
+@app.route("/vscode/ab", methods=["GET", "POST", "PUT", "DELETE"])
 @app.route('/telemetry{path:path}', methods=["GET", "POST", "PUT", "DELETE"])
 async def telemetry(request: Request):
-    if request.url.path == '/telemetry/vscode/ab' :
+    if request.url.path in ['/telemetry/vscode/ab', '/vscode/ab'] :
         data  = {
             "Features": [
                 "vsliv368cf",
